@@ -31,9 +31,9 @@ const AllPackages = () => {
             </div>
           </Row>
           <Row xs={1} md={2} lg={3} className="my-5">
-            {packDetails.map((detail) => (
+            {packDetails.map((detail, index) => (
               <SinglepackageCard
-                key={detail.id}
+                key={index}
                 detail={detail}
               ></SinglepackageCard>
             ))}

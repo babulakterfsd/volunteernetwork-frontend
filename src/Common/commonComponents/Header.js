@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <Navbar
       className="py-4"
-      expand="md"
+      expand="lg"
       sticky="top"
       style={{ backgroundColor: "#fff", borderBottom: "1px solid #ccc" }}
     >
@@ -26,7 +26,7 @@ const Header = () => {
                 width: "30px",
               }}
             />
-            <span className="logoitem text-light-green d-inline-block mx-2">Volunteer Network</span>
+            <span className="logoitem text-light-green d-inline-block mx-2">Volunteer</span>
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -35,19 +35,19 @@ const Header = () => {
             <Link to="/home" className="text-decoration-none mx-2 mb-2 mb-md-0">
               <span className="text-muted menuitem">Home</span>
             </Link>
-            <Link
+            {/* <Link
               to="/about"
               className="text-decoration-none  mx-2 mb-2 mb-md-0"
             >
               <span className="text-muted menuitem">About</span>
-            </Link>
+            </Link> */}
             <Link
               to="/allpackages"
               className="text-decoration-none mx-2 mb-2 mb-md-0"
             >
               <span className="text-muted menuitem">packages</span>
             </Link>
-            <Link
+            {/* <Link
               to="/process"
               className="text-decoration-none mx-2 mb-2 mb-md-0"
             >
@@ -64,13 +64,19 @@ const Header = () => {
               className="text-decoration-none mx-2 mb-2 mb-md-0"
             >
               <span className="text-muted menuitem">Order</span>
-            </Link>
+            </Link> */}
             <Link
+              to="/adduser"
+              className="text-decoration-none mx-2 mb-2 mb-md-0"
+            >
+              <span className="text-muted menuitem">Add User</span>
+            </Link>
+            {/* <Link
               to="/contact"
               className="text-decoration-none mx-2 mb-2 mb-md-0"
             >
               <span className="text-muted menuitem">Contact</span>
-            </Link>
+            </Link> */}
 
             <div className="user-state-in-header ms-md-5">
               {user?.email || user?.displayName ? (

@@ -26,12 +26,12 @@ const SinglepackageCard = ({ detail }) => {
             </h5>
           </div>
 
-          <Card.Title className="abril-font">{detail?.name}</Card.Title>
+          <Card.Title className="abril-font">{detail?.title}</Card.Title>
 
           <p className="text-cyan">{detail?.shortDesc}</p>
         </Card.Body>
         <Card.Footer className="d-flex justify-content-between">
-          <Link to={`/DetailedService/${detail?.id}`}>
+          <Link to={`/DetailedService/${detail?._id}`}>
             <Button className="btn-abril fw-semi-bold  py-2 px-3">
               See Details
             </Button>

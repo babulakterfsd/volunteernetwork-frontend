@@ -4,7 +4,7 @@ const GetData = () => {
   const [packDetails, setPackDetails] = useState([]);
 
   useEffect(() => {
-    fetch("services.json")
+    fetch("https://murmuring-shelf-43649.herokuapp.com/allpackages")
       .then((res) => res.json())
       .then((data) => setPackDetails(data));
   }, []);

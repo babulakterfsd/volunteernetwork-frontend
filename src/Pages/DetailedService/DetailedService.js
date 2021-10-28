@@ -2,60 +2,67 @@ import React, { useEffect, useState } from "react";
 import { Card, Container, Row, Button } from "react-bootstrap";
 import { useParams } from "react-router";
 import "./DetailedService.css";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
+
+
 
 const TourDetail = () => {
-  const { serviceID } = useParams();
+  const { packageId } = useParams();
   const [packDetails, setPackDetails] = useState([]);
 
+  const history = useHistory();
+  const redirect_uri =  "/allpackages";
+
+  //details of a package
   useEffect(() => {
-    fetch("/services.json")
+    fetch(`https://murmuring-shelf-43649.herokuapp.com/DetailedService/${packageId}`)
       .then((res) => res.json())
       .then((data) => setPackDetails(data));
-  }, []);
+  }, [packageId]);
+
+  //delete a package
+  const handleDeletePack = (id) => {
+    const proceed = window.confirm("Are you sure to delete the user?");
+    if (proceed) {
+      const url = `https://murmuring-shelf-43649.herokuapp.com/DetailedService/${packageId}`;
+
+      fetch(url, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            alert("Deleted Successfully !");
+            history.push(redirect_uri);
+            // const remainingPacks = packDetails.filter((pack) => pack._id !== id);
+            // setPackDetails(remainingPacks);
+          }
+        });
+    }
+  };
 
   return (
     <>
       <section id="detailedservice-banner" className="py-5">
-        <h2 className="text-center text-abril-white">
-          Details Of : {packDetails[serviceID - 1]?.name}
-        </h2>
-      </section>
-      <section id="tourdetail" className="pt-5 mt-3">
         <Container>
           <Row>
-            <div className="col-12 col-md-4">
-              <img
-                src={packDetails[serviceID - 1]?.img}
-                alt="detailedpic"
-                className="img-fluid"
-              />
-            </div>
-            <div className="col-12 col-md-8">
+            <div className="col-12 col-md-6 mx-auto">
               <Card className="shadow-none mb-5">
                 <Card.Body>
-                  <div className="d-flex justify-content-between">
-                    <Card.Text className="text-light-green fw-semi-bold">
-                      {packDetails[serviceID - 1]?.duration}
-                    </Card.Text>
-                    <h5 className="text-light-green fw-bolder">
-                      ${packDetails[serviceID - 1]?.price} /month
-                    </h5>
-                  </div>
-
+                  <Card.Img variant="top" src={packDetails?.img} />
                   <Card.Title className="abril-font">
-                    {packDetails[serviceID - 1]?.name}
+                    {packDetails?.title}
                   </Card.Title>
-                  <p className="text-cyan">
-                    {packDetails[serviceID - 1]?.longDesc}
-                  </p>
                 </Card.Body>
-                <Card.Footer className="d-flex justify-content-center">
-                  <Link to="/order">
+                <Card.Footer className="d-flex justify-content-around">
+                  <Link to={`${packDetails?._id}/updatepack`}>
                     <Button className="btn-light-green fw-bold py-2 px-3">
-                      Enroll Now
+                      Update Pack
                     </Button>
-                  </Link>
+                  </Link>     
+                    <Button onClick={() => handleDeletePack(packDetails?.packageId)} className="btn-danger fw-bold py-2 px-3">
+                      Delate pack
+                    </Button>
                 </Card.Footer>
               </Card>
             </div>
